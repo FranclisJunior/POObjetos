@@ -28,15 +28,7 @@ public class SCA {
 					"2-Gerenciar Professores \n 3-Gerenciar Disciplinas \n 4-Gerenciar Turmas \n\n 0-Sair"));
 			
 			switch(op){
-			case(9):
-				try {
-					Disciplina disciplina = facade.criarDisciplina();
-				} catch (SCARuntimeException e) {					
-					e.printStackTrace();
-				} catch (SCAException e) {					
-					e.printStackTrace();
-				}
-				break;
+			
 			case(1): //Gerenciar Cursos
 				
 				boolean cnd1 = true;
@@ -167,10 +159,11 @@ public class SCA {
 							String periodo= JOptionPane.showInputDialog(null,"Digite o Periodo");						
 							int num= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Numero da Turma"));
 							int numD = Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Numero da Disciplina"));
+							String horario = JOptionPane.showInputDialog(null,"Digite o Horario");
 							try{						
 								Disciplina d = facade.verificaDisciplina(numD);
 								if(d!=null){
-									facade.criarTurma(periodo,d,num);
+									facade.criarTurma(periodo,d,num,horario);
 									JOptionPane.showMessageDialog(null,"Turma Criada");
 								}else{
 									JOptionPane.showMessageDialog(null,"Nao existe Disciplina com esse Codigo");
@@ -187,18 +180,17 @@ public class SCA {
 					case(2): //Ver Turmas
 						
 						int numero;
-						String prd;	
-						String disci_nome;
-						String disci_cod; 
+						String prd,disci_nome,disci_cod,horario;						 
 						String turmas="Turmas: \n";
 						Iterator<Turma> it3 = facade.getTurmasIterator();				
 						while(it3.hasNext()){
 							Turma t = it3.next();
 							numero= t.getNumero();
 							prd= t.getPeriodo();
-							disci_nome ="Nome da Disciplina: "+ t.getDisciplina().getNome()+" ";
-							disci_cod ="Cod: "+t.getDisciplina().getCodigo();
-							turmas+= "Numero : "+numero+" "+"\nPeriodo : "+prd+"\n"+disci_nome+" "+disci_cod+"\n\n";
+							disci_nome =t.getDisciplina().getNome()+" ";
+							disci_cod =""+t.getDisciplina().getCodigo();
+							horario = "Horario :"+t.getHorario();
+							turmas+= "Numero : "+numero+" "+"\nPeriodo : "+prd+"\n"+"Nome Disciplina: "+disci_nome+"\nCodigo Disciplina"+disci_cod+"\n"+horario+"\n\n";
 						}
 						JOptionPane.showMessageDialog(null,turmas);					
 						break;
@@ -240,6 +232,10 @@ public class SCA {
 			case(0): //Sair do Programa				
 				cnd=false;
 				break;
+				
+			default:
+				JOptionPane.showMessageDialog(null, "Opcao Invalida");
+				break;	
 			}			
 		}
 	}

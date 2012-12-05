@@ -19,10 +19,10 @@ public class SCAFacade {
 	
 	public SCAPersistencia persistencia =  new SCAPersistenciaArquivo();
 	
-	public Turma criarTurma(String periodo,Disciplina disciplina,int num) throws SCAException, SCARuntimeException{
+	public Turma criarTurma(String periodo,Disciplina disciplina,int num,String hor) throws SCAException, SCARuntimeException{
 		Turma turma = new Turma();
 		try{
-			ArrayList<Turma> turm =persistencia.recuperarTurmas();
+			ArrayList<Turma> turm = persistencia.recuperarTurmas();
 			for(Turma t : turm){
 				if(periodo.equals(t.getPeriodo()) && num==t.getNumero() && disciplina.getCodigo()== t.getDisciplina().getCodigo()){
 					throw new SCAException();
@@ -31,7 +31,8 @@ public class SCAFacade {
 			
 			turma.setPeriodo(periodo);
 			turma.setDisciplina(disciplina);
-			turma.setNumero(num);			
+			turma.setNumero(num);
+			turma.setHorario(hor);
 			persistencia.salvar(turma);			
 		}catch(SCAPersistenciaException ex){
 			JOptionPane.showMessageDialog(null,"Erro quase impossivel!Erro ao salvar na memoria");

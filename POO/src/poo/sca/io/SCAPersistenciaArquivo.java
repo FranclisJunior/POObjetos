@@ -129,8 +129,9 @@ public class SCAPersistenciaArquivo implements SCAPersistencia{
 	public static void gravarArquivos(ArrayList array, String local) { 
 		ObjectOutputStream out;
 		try {
-			out = new ObjectOutputStream(new FileOutputStream(local));
-			boolean file = new File("Arquivos").mkdirs();
+			FileOutputStream arquivo = new FileOutputStream(local);			
+			out = new ObjectOutputStream(arquivo);
+			boolean file = new File("Arquivos").mkdirs();			
 			out.writeObject(array);
 			out.flush();
 			out.close();

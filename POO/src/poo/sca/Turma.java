@@ -22,18 +22,22 @@ public class Turma implements Serializable {
 		
 	}
 
-	public void addProfessor(Professor professor){
-		professores.add(professor);
+	public void setProfessor(ArrayList<Professor> professor){
+		this.professores = professor;
 	}
 	
-	public Iterator<Professor> getProfessor(){
-		return professores.iterator();
-		
+	public ArrayList getProfessor(){
+		return professores;		
 	}
-	public Iterator<Curso> getCurso(){
-		return cursos.iterator();
+	
+	public void setCurso(ArrayList<Curso> curso){
+		this.cursos=curso;
 	}
-
+	
+	public ArrayList getCurso(){
+		return cursos;		
+	}
+	
 	public Disciplina getDisciplina() {
 		return disciplina;
 	}

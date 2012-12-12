@@ -4,4 +4,7 @@ public class SCAPersistenciaException extends Exception {
 	public SCAPersistenciaException(String msg){
 		super(msg);
 	}
+	public SCAPersistenciaException(){
+		
+	}
 }

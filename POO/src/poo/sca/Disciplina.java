@@ -2,7 +2,7 @@ package poo.sca;
 
 import java.io.Serializable;
 
-public class Disciplina implements Serializable {
+public class Disciplina  {
 	
 	private int codigo;
 	private String nome;

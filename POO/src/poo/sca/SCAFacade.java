@@ -11,6 +11,7 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 import poo.sca.io.SCAPersistencia;
+import poo.sca.io.SCAPersistenciaArquivo1;
 import poo.sca.io.SCAPersistenciaArquivo;
 import poo.sca.io.SCAPersistenciaException;
 import poo.sca.io.SCAPersistenciaMemoria;

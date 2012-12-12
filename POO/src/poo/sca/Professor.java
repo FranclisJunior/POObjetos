@@ -2,7 +2,7 @@ package poo.sca;
 
 import java.io.Serializable;
 
-public class Professor implements Serializable {
+public class Professor  {
 	private int matricula;
 	private String nome;
 	

@@ -1,10 +1,10 @@
 package poo.sca;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
 
-public class Turma implements Serializable {
+import java.util.ArrayList;
+
+
+public class Turma {
 	private Disciplina disciplina;
 	private ArrayList<Professor> professores = new ArrayList<Professor>();
 	private ArrayList<Curso> cursos = new  ArrayList<Curso>();

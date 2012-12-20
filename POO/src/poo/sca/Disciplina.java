@@ -1,6 +1,5 @@
 package poo.sca;
 
-import java.io.Serializable;
 
 public class Disciplina  {
 	
@@ -11,8 +10,13 @@ public class Disciplina  {
 		return codigo;
 	}
 	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+		if(codigo>99999 || codigo<=0){
+				throw new SCARuntimeException("numero menor que 0 ou maior que 99999");				
+		}else{
+			this.codigo = codigo;
+		}		
 	}
+	
 	public String getNome() {
 		return nome;
 	}

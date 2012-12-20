@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
+import poo.logger.Logger;
 import poo.sca.io.SCAPersistencia;
 import poo.sca.io.SCAPersistenciaArquivo1;
 import poo.sca.io.SCAPersistenciaArquivo;
@@ -20,7 +21,7 @@ public class SCAFacade {
 	
 	public SCAPersistencia persistencia =  new SCAPersistenciaArquivo();
 	
-	public Turma criarTurma(String periodo,int num,String hor) throws SCAException, SCARuntimeException{
+	public Turma criarTurma(String periodo,int num,String hor) throws SCAException{
 		Turma turma = new Turma();
 		ArrayList<Professor> professores= new ArrayList<Professor>();
 		ArrayList<Curso> cursos =new ArrayList<Curso>();
@@ -86,7 +87,7 @@ public class SCAFacade {
 			ArrayList<Turma> turm = persistencia.recuperarTurmas();
 			for(Turma t : turm){
 				if(periodo.equals(t.getPeriodo()) && num==t.getNumero()){
-					throw new SCAException();
+					throw new SCAException("Ja existe Turma com esses dados");
 				}
 			}
 			
@@ -98,48 +99,66 @@ public class SCAFacade {
 			turma.setCurso(cursos);
 			persistencia.salvar(turma);			
 		}catch(SCAPersistenciaException ex){
-			JOptionPane.showMessageDialog(null,"Erro ao salvar");
+			Logger.getInstance().log(ex);
+			throw new SCAException("Erro ao Salvar");
 		}
 		return turma;
 	}
 	
 
 	public Disciplina criarDisciplina()throws SCAException, SCARuntimeException {
-		boolean c = true;
-		int cod= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo da Disciplina"));
 		
-		//verifica se o codigo da disciplina é maior que 9999
-		do{
-			if(cod>9999){
-				JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
-				cod= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo da Disciplina"));
-			}else{
-				c=false;
-			}
-			
-		}while(c);
-		
+		int cod= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo da Disciplina"));	
 		String nome= JOptionPane.showInputDialog(null,"Digite o Nome da Disciplina");
 		Disciplina disciplina = new Disciplina();
-		disciplina.setCodigo(cod);
-		disciplina.setNome(nome);
 		
 		// Testa se ja tem disciplina com o mesmo codigo na lista antes salvar no arquivo.	
-		try{		
-			ArrayList<Disciplina> disc = persistencia.recuperarDisciplinas();		
+		ArrayList<Disciplina> disc;
+		try {
+			disc = persistencia.recuperarDisciplinas();
 			for(Disciplina d : disc){
 				if(cod==d.getCodigo()){
-					throw new SCAException();
+					throw new SCAException("Ja existe disciplina com esse codigo");
 				}
-			}		
-			persistencia.salvar(disciplina);			
-		}catch(SCAPersistenciaException ex){
-			JOptionPane.showMessageDialog(null,"Erro ao salvar");
+			}
+		} catch (SCAPersistenciaException e) {	
+			Logger.getInstance().log(e);
+			throw new SCAException("Erro ao ler o arquivo");
+		}								
+				
+		try{
+			disciplina.setCodigo(cod);
+			disciplina.setNome(nome);
+			persistencia.salvar(disciplina);
+		}catch(SCARuntimeException ex){
+			Logger.getInstance().log(ex);
+			//Pede novamente o codigo ao usuario
+			JOptionPane.showMessageDialog(null,"Codigo invalido, Por Favor Tente Novamente");
+			cod= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo da Disciplina"));
+			try{
+				//tenta seta o codigo e salvar
+				disciplina.setCodigo(cod);
+				persistencia.salvar(disciplina);
+			}catch(SCARuntimeException ex2){
+				// nao teve jeito usuario nao sabe ler
+				Logger.getInstance().log(ex);
+				JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
+				throw new SCARuntimeException("Disciplina nao Criada");
+			
+			}catch(SCAPersistenciaException ex2){
+				Logger.getInstance().log(ex2);
+				throw new SCAException("Erro ao salvar no arquivo");
+			}			
+		} catch (SCAPersistenciaException e) {
+			Logger.getInstance().log(e);
+			throw new SCAException("Erro ao salvar no arquivo");
 		}
 		return disciplina;
 	}
+		
 	
-	public Professor criarProfessor()throws SCAException, SCARuntimeException{
+	
+	public Professor criarProfessor()throws SCARuntimeException,SCAException{
 		int matricula= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Matricula do Professor(a)"));
 		String n= JOptionPane.showInputDialog(null,"Digite o Nome do Professor(a)");
 		Professor professor = new Professor();
@@ -151,19 +170,20 @@ public class SCAFacade {
 			ArrayList<Professor> prof = persistencia.recuperarProfessores();		
 			for(Professor p:prof){
 				if(matricula==p.getMatricula()){
-					throw new SCAException();
+					throw new SCARuntimeException("Ja existe professor com essa matricula");
 				}
 			}			
 			persistencia.salvar(professor);
 		
 		}catch(SCAPersistenciaException ex){
-			JOptionPane.showMessageDialog(null,"Erro ao salvar");
+			Logger.getInstance().log(ex);
+			throw new SCAException("Erro ao Salvar");			
 		}
 		
 		return professor;
 	}
 	
-	public Curso criarCurso()throws SCAException, SCARuntimeException {
+	public Curso criarCurso()throws SCAException, SCARuntimeException{
 		Curso curso = new Curso();
 		try{
 			int cod= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo do Curso"));
@@ -171,7 +191,7 @@ public class SCAFacade {
 			ArrayList<Curso> curs = persistencia.recuperarCursos();
 			for(Curso crs: curs){
 				if(cod==crs.getCodigo()){
-					throw new SCAException();
+					throw new SCAException("Ja existe Curso com esse codigo");
 				}
 			}
 			
@@ -179,169 +199,194 @@ public class SCAFacade {
 			curso.setNome(nome);
 			persistencia.salvar(curso);
 		}catch(SCAPersistenciaException ex){
-			JOptionPane.showMessageDialog(null,"Erro ao salvar");
+			Logger.getInstance().log(ex);
+			throw new SCAException("Erro ao Salvar");
 		}
 		return curso;	
 	}
 	
-	public Turma getTurma(String per,int codDisciplina, int num){
+	//Metodo de perquisar turma
+	public Turma getTurma(String per,int codDisciplina, int num) throws SCAException{
 		Turma turma=null;
 		String periodo;
 		int cod;
-		int numero;		
-		Iterator<Turma> it = getTurmasIterator();
-		while(it.hasNext()){
-			Turma t = it.next();
-			periodo = t.getPeriodo();
-			cod = t.getDisciplina().getCodigo();
-			numero = t.getNumero();
-			
-			if(periodo.equals(per) && cod==codDisciplina && numero==num){
-				turma = t;
+		int numero;
+		try{
+			Iterator<Turma> it = getTurmasIterator();
+			while(it.hasNext()){
+				Turma t = it.next();
+				periodo = t.getPeriodo();
+				cod = t.getDisciplina().getCodigo();
+				numero = t.getNumero();			
+				if(periodo.equals(per) && cod==codDisciplina && numero==num){
+					turma = t;
+				}
+				
 			}
-			
+			return turma;
+		}catch(SCAException ex){
+			throw new SCAException("Erro ao ler o arquivo turma");
 		}
-		return turma;
 		
 	}
 	
-	public Iterator<Turma> getTurmasIterator(){
+	public Iterator<Turma> getTurmasIterator() throws  SCAException{
 		try{
 			return persistencia.recuperarTurmas().iterator();
 		}catch(SCAPersistenciaException ex){
-			JOptionPane.showMessageDialog(null,"Erro ao salvar");
-		}		
-		return null;
+			throw new SCAException("Erro ao ler o arquivo turmas");			
+		}
 	}
 	
-	public Iterator<Curso> getCursosIterator(){
+	public Iterator<Curso> getCursosIterator()throws  SCAException{
 		try{
 			return persistencia.recuperarCursos().iterator();
 		}catch(SCAPersistenciaException ex){
-			JOptionPane.showMessageDialog(null,"Erro ao salvar ");
-		}
-		return null;
+			Logger.getInstance().log(ex);
+			throw new SCAException("Erro ao ler o arquivo cursos");
+		}		
 	}
 	
-	public Iterator<Disciplina> getDisciplinasIterator(){
+	public Iterator<Disciplina> getDisciplinasIterator() throws SCAException{
 		try{	
 			return persistencia.recuperarDisciplinas().iterator();
 		}catch(SCAPersistenciaException ex){
-			JOptionPane.showMessageDialog(null,"Erro ao salvar ");
-		}
-		return null;
+			Logger.getInstance().log(ex);
+			throw new SCAException("Erro ao ler o arquivo de disciplinas");
+		}		
 	}
 	
-	public Iterator<Professor> getProfessoresIterator(){
-		Iterator<Professor> it = null;
+	public Iterator<Professor> getProfessoresIterator()throws SCAException{
+		
 		try{
-			it= persistencia.recuperarProfessores().iterator();
+			return persistencia.recuperarProfessores().iterator();
 		}catch(SCAPersistenciaException ex){
-			JOptionPane.showMessageDialog(null,"Erro salvar");
+			Logger.getInstance().log(ex);
+			throw new SCAException("Erro ao ler o arquivo de professores");
 		}
-		return it;
+		
 			
 	}
 	
-	public Turma removerTurma(String per,int codDisciplina, int num){
+	public Turma removerTurma(String per,int codDisciplina, int num) throws  SCAException{
 		Turma turma=null;
 		String periodo;
 		int cod;
-		int numero;		
-		Iterator<Turma> it = getTurmasIterator();
-		while(it.hasNext()){
-			Turma t = it.next();
-			periodo = t.getPeriodo();
-			cod = t.getDisciplina().getCodigo();
-			numero = t.getNumero();
-			
-			if(periodo.equals(per) && cod==codDisciplina && numero==num){
-				turma = t;
-				it.remove();				
+		int numero;
+		try{
+			Iterator<Turma> it = getTurmasIterator();
+			while(it.hasNext()){
+				Turma t = it.next();
+				periodo = t.getPeriodo();
+				cod = t.getDisciplina().getCodigo();
+				numero = t.getNumero();
+				
+				if(periodo.equals(per) && cod==codDisciplina && numero==num){
+					turma = t;
+					it.remove();				
+				}
+				
 			}
-			
+		}catch( SCAException ex){
+			throw new SCAException("Erro ao ler o arquivo");
 		}
-		
 		return turma;
 	}
 	
 	// verifica se tem uma disciplina na lista de disciplinas com o codigo passado antes de adicionar na turma.	
-	public Disciplina verificaCodDisciplina(int cod){	
-		Iterator<Disciplina> itD = getDisciplinasIterator();
-		Disciplina dis = null;
-		while(itD.hasNext()){
-			Disciplina d = itD.next();
-			if(d.getCodigo()==cod){
-				dis=d;								
+	public Disciplina verificaCodDisciplina(int cod)throws  SCAException{	
+		try{
+			Iterator<Disciplina> itD = getDisciplinasIterator();
+			Disciplina dis = null;
+			while(itD.hasNext()){
+				Disciplina d = itD.next();
+				if(d.getCodigo()==cod){
+					dis=d;								
+				}
 			}
+			return dis;
+		}catch(SCAException ex){
+			throw new SCAException("Erro ao ler o Arquivo");
 		}
-		return dis;
+		
 	}
 	
 	// verifica se tem um professor na lista de professores com a matricula passada antes de adicionar na turma;
-	public Professor verificaMatriculaProfessor(int matric){ 	
+	public Professor verificaMatriculaProfessor(int matric) throws SCAException{ 	
 		Professor prof = null;
-		Iterator<Professor> itP = getProfessoresIterator();
-		while(itP.hasNext()){
-			Professor p = itP.next();
-			if(p.getMatricula()==matric){
-				prof=p;
+		try{
+			Iterator<Professor> itP = getProfessoresIterator();
+			while(itP.hasNext()){
+				Professor p = itP.next();
+				if(p.getMatricula()==matric){
+					prof=p;
+				}
 			}
+			return prof;
+		}catch(SCAException ex){
+			throw new SCAException("Erro ao ler o arquivo");
 		}
-		return prof;
 	}
 	
-	public Curso verificaCodCurso(int cod){
+	public Curso verificaCodCurso(int cod) throws SCARuntimeException{
 		Curso curso = null;
-		Iterator<Curso> itC = getCursosIterator();
-		while(itC.hasNext()){
-			Curso c = itC.next();
-			if(c.getCodigo()==cod){
-				curso = c;
+		try{
+			Iterator<Curso> itC = getCursosIterator();
+			while(itC.hasNext()){
+				Curso c = itC.next();
+				if(c.getCodigo()==cod){
+					curso = c;
+				}
 			}
+			return curso;
+		}catch(SCAException ex){
+			throw new SCARuntimeException("Erro ao ler o Arquivo");
 		}
-		return curso;
 	}
 	
-	//Metodo para ver mais detalhes da Turma selecionada
-		public  void verDetalhes(int num){
-			int numero;		
-			Iterator<Turma> it3 = getTurmasIterator();
-			Turma turma = null;
-			while(it3.hasNext()){
-				Turma t = it3.next();
-				numero= t.getNumero();			
-				if(numero==num){
-					turma = t;
-				}		
+	//Metodo para ver todos os dados da Turma selecionada
+		public  void verDetalhes(int num) throws SCAException, SCARuntimeException{
+			int numero;
+			try{		
+				Iterator<Turma> it3 = getTurmasIterator();
+				Turma turma = null;
+				while(it3.hasNext()){
+					Turma t = it3.next();
+					numero= t.getNumero();			
+					if(numero==num){
+						turma = t;
+					}		
+				}
+				if(turma!=null){
+					String turmas="Dados da Turma: \n\n";
+					String prd,disci_nome,disci_cod,horario;
+					
+					//recupera os professores da turma
+					ArrayList<Professor> prof = turma.getProfessor();
+					String nomesProf="Professores: \n";
+					for(Professor p: prof){
+						nomesProf += p.getNome()+"\n";
+					}
+					
+					//recupera os cursos da turmma
+					ArrayList<Curso> crs = turma.getCurso();
+					String nomesCursos= "Cursos: \n";
+					for(Curso c : crs){
+						nomesCursos+=c.getNome()+"\n";
+					}
+								
+					numero= turma.getNumero();
+					prd= turma.getPeriodo();
+					disci_nome =turma.getDisciplina().getNome()+" ";
+					disci_cod =""+turma.getDisciplina().getCodigo();
+					horario = "Horario : "+turma.getHorario();
+					turmas+= "Numero : "+numero+" "+"\nPeriodo : "+prd+"\n"+"Nome Disciplina : "+disci_nome+"\nCodigo Disciplina :"+disci_cod+"\n"+horario+"\n\n"+nomesProf+"\n"+nomesCursos;
+					JOptionPane.showMessageDialog(null,turmas);	
+				}else{
+					throw new SCARuntimeException("Nao existe turma com esse numero");
+				}
+			}catch(SCAException ex){
+				throw new SCAException("Erro ao ler o arquivo");
 			}
-			if(turma!=null){
-				String turmas="Dados da Turma: \n\n";
-				String prd,disci_nome,disci_cod,horario;
-				
-				//recupera os professores da turma
-				ArrayList<Professor> prof = turma.getProfessor();
-				String nomesProf="Professores: \n";
-				for(Professor p: prof){
-					nomesProf += p.getNome()+"\n";
-				}
-				
-				//recupera os cursos da turmma
-				ArrayList<Curso> crs = turma.getCurso();
-				String nomesCursos= "Cursos: \n";
-				for(Curso c : crs){
-					nomesCursos+=c.getNome()+"\n";
-				}
-							
-				numero= turma.getNumero();
-				prd= turma.getPeriodo();
-				disci_nome =turma.getDisciplina().getNome()+" ";
-				disci_cod =""+turma.getDisciplina().getCodigo();
-				horario = "Horario : "+turma.getHorario();
-				turmas+= "Numero : "+numero+" "+"\nPeriodo : "+prd+"\n"+"Nome Disciplina : "+disci_nome+"\nCodigo Disciplina :"+disci_cod+"\n"+horario+"\n\n"+nomesProf+"\n"+nomesCursos;
-				JOptionPane.showMessageDialog(null,turmas);	
-			}else{
-				JOptionPane.showMessageDialog(null,"Nao existe turma com esse numero");
-			}		
 		}
 }

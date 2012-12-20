@@ -4,6 +4,8 @@ package poo.sca.ui;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
+
+import poo.logger.Logger;
 import poo.sca.Curso;
 import poo.sca.Disciplina;
 import poo.sca.Professor;
@@ -11,12 +13,13 @@ import poo.sca.SCAException;
 import poo.sca.SCAFacade;
 import poo.sca.SCARuntimeException;
 import poo.sca.Turma;
+import poo.sca.io.SCAPersistenciaException;
 
 public class SCA {
 	private static SCAFacade facade = new SCAFacade();	
 
-	public static void main(String [] args){
-		SCA.exibirMenu();
+	public static void main(String [] args){		
+		SCA.exibirMenu();		
 	}
 	
 	
@@ -41,27 +44,36 @@ public class SCA {
 					
 					switch(op1){
 					case (1): // Adcionar Curso
-						int op11= 1;
+						int op11= 2;
 						do{
 							try{
 								Curso curso = facade.criarCurso();				
 								JOptionPane.showMessageDialog(null,"Curso Criado");
 								op11 = Integer.parseInt(JOptionPane.showInputDialog(null,"Deseja criar outro Curso? \n1-Sim \n0-Nao"));
 							}catch(SCAException ex){
-								JOptionPane.showMessageDialog(null,"Ja existe Curso com esse Codigo");
+								Logger.getInstance().log(ex);
+								JOptionPane.showMessageDialog(null, ex.getMessage());
 								op11=0;
-							}					
+							}catch(SCARuntimeException ex){
+								Logger.getInstance().log(ex);
+								JOptionPane.showMessageDialog(null, ex.getMessage());								
+								--op11;
+							}
 						}while(op11==1);	
 						break;
 						
 					case(2): //Ver Cursos				
-						String cursos="Cursos: \n";				
-						Iterator<Curso> it = facade.getCursosIterator();					
-						while(it.hasNext()){
-							Curso c = it.next();				
-							cursos+= "Nome : "+c.getNome()+" "+"\nCodigo : "+c.getCodigo()+"\n\n";
+						String cursos="Cursos: \n";
+						try{
+							Iterator<Curso> it = facade.getCursosIterator();					
+							while(it.hasNext()){
+								Curso c = it.next();				
+								cursos+= "Nome : "+c.getNome()+" "+"\nCodigo : "+c.getCodigo()+"\n\n";
+							}
+							JOptionPane.showMessageDialog(null,cursos);
+						}catch(SCAException ex)	{
+							JOptionPane.showMessageDialog(null,ex.getMessage());
 						}
-						JOptionPane.showMessageDialog(null,cursos);
 						break;
 					case(0):  //Sair Menu Gerenciar Cursos
 						cnd1 = false;
@@ -78,28 +90,38 @@ public class SCA {
 					
 					switch(op2){
 					case(1): //Adcionar Professor
-						int op21=1;
+						int op21=2;
 						do{
 							try{	
 								Professor professor = facade.criarProfessor();												
 								JOptionPane.showMessageDialog(null,"Professor Criado");
 								op21 = Integer.parseInt(JOptionPane.showInputDialog(null,"Deseja Criar Outro Professor? \n1-Sim \n0-Nao"));
+							}catch(SCARuntimeException ex){
+								Logger.getInstance().log(ex);
+								--op21;
+								JOptionPane.showMessageDialog(null,ex.getMessage());
 							}catch(SCAException ex){
-								op21=0;
-								JOptionPane.showMessageDialog(null,"Ja Existe Professor com essa matricula");
-							}
+								Logger.getInstance().log(ex);
+								op21= 0;
+								JOptionPane.showMessageDialog(null,ex.getMessage());
+							} 
 							
 						}while(op21==1);	
 						break;
 						
 					case(2): //Ver Professores
 						String professores="Professores: \n\n";
-						Iterator<Professor> it2 = facade.getProfessoresIterator();			
-						while (it2.hasNext()) {
-							Professor p = it2.next();
-							professores += " Mátricula: " + p.getMatricula() + " \n Nome: " + p.getNome()  + "\n\n";
+						try{
+							Iterator<Professor> it2 = facade.getProfessoresIterator();			
+							while (it2.hasNext()) {
+								Professor p = it2.next();
+								professores += " Mátricula: " + p.getMatricula() + " \n Nome: " + p.getNome()  + "\n\n";
+							}
+							JOptionPane.showMessageDialog(null, professores);
+						}catch(SCAException ex){
+							Logger.getInstance().log(ex);
+							JOptionPane.showMessageDialog(null, ex.getMessage());
 						}
-						JOptionPane.showMessageDialog(null, professores);
 						break;
 					case(0):  //Sair Menu Gerenciar Professores
 						cnd2=false;
@@ -123,8 +145,13 @@ public class SCA {
 								JOptionPane.showMessageDialog(null,"Disciplina Criada");
 								op31 = Integer.parseInt(JOptionPane.showInputDialog(null,"Deseja criar Outra Disciplina? \n1-Sim \n0-Nao"));
 							}catch(SCAException ex){
+								Logger.getInstance().log(ex);
 								op31=0;
-								JOptionPane.showMessageDialog(null,"Ja Existe Disciplina com esse Codigo");
+								JOptionPane.showMessageDialog(null,ex.getMessage());
+							}catch(SCARuntimeException ex2){
+								Logger.getInstance().log(ex2);
+								op31=0;								
+								JOptionPane.showMessageDialog(null,"Disciplina nao Criada");
 							}
 							
 						}while(op31==1);	
@@ -132,12 +159,17 @@ public class SCA {
 					case(2): //Ver Disciplinas
 						
 						String disciplinas ="Disciplinas: \n\n";
-						Iterator<Disciplina> it2 = facade.getDisciplinasIterator();			
-						while (it2.hasNext()) {
-							Disciplina d = it2.next();
-							disciplinas += " Codigo: " + d.getCodigo() + " \n Nome: " + d.getNome()  + "\n\n";
+						try{
+							Iterator<Disciplina> it2 = facade.getDisciplinasIterator();			
+							while (it2.hasNext()) {
+								Disciplina d = it2.next();
+								disciplinas += " Codigo: " + d.getCodigo() + " \n Nome: " + d.getNome()  + "\n\n";
+							}
+							JOptionPane.showMessageDialog(null,disciplinas);
+						}catch(SCAException ex)	{
+							Logger.getInstance().log(ex);
+							JOptionPane.showMessageDialog(null, ex.getMessage());
 						}
-						JOptionPane.showMessageDialog(null,disciplinas);
 						break;
 						
 						
@@ -169,8 +201,9 @@ public class SCA {
 								JOptionPane.showMessageDialog(null,"Turma Criada");
 								op41 = Integer.parseInt(JOptionPane.showInputDialog(null,"Deseja criar outra Turma? \n1-Sim \n0-Nao"));
 							}catch(SCAException ex){
+								Logger.getInstance().log(ex);
 								op41=0;
-								JOptionPane.showMessageDialog(null,"Ja existe Turma com esses dados");
+								JOptionPane.showMessageDialog(null,ex.getMessage());
 							}
 						
 						}while(op41==1);
@@ -181,32 +214,43 @@ public class SCA {
 						int numero;
 						String prd,disci_nome,disci_cod,horario;						 
 						String turmas="Para mais detalhes digite o numero da Turma!\n\nTurmas: \n";
-						Iterator<Turma> it3 = facade.getTurmasIterator();				
-						while(it3.hasNext()){
-							Turma t = it3.next();
-							numero= t.getNumero();
-							prd= t.getPeriodo();
-							disci_nome =t.getDisciplina().getNome()+" ";					
-							turmas+= "Numero :"+numero+"  "+"Periodo :"+ prd +"  "+"Disciplina :"+disci_nome+"\n";
+						try{
+							Iterator<Turma> it3 = facade.getTurmasIterator();				
+							while(it3.hasNext()){
+								Turma t = it3.next();
+								numero= t.getNumero();
+								prd= t.getPeriodo();
+								disci_nome =t.getDisciplina().getNome()+" ";					
+								turmas+= "Numero :"+numero+"  "+"Periodo :"+ prd +"  "+"Disciplina :"+disci_nome+"\n";
+							}
+							int numeroT = Integer.parseInt(JOptionPane.showInputDialog(null,turmas+"\n0-Voltar"));
+							if(numeroT!=0){
+								facade.verDetalhes(numeroT);							
+							}
+						}catch(SCAException ex){
+							Logger.getInstance().log(ex);
+							JOptionPane.showMessageDialog(null,ex.getMessage());
+						}catch(SCARuntimeException ex){
+							Logger.getInstance().log(ex);
+							JOptionPane.showMessageDialog(null,ex.getMessage());
 						}
-						int numeroT = Integer.parseInt(JOptionPane.showInputDialog(null,turmas+"\n0-Voltar"));
-						if(numeroT==0){
-							break;
-						}else{
-							facade.verDetalhes(numeroT);	
-						}						
 						break;
 						
 					case(3): //Remover Turma
 						String p2= JOptionPane.showInputDialog(null,"Digite o Periodo da Turma");	
 						int codD2= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo da Disciplian"));
 						int n2= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Numero da Turma"));
-						Turma turma2 = facade.getTurma(p2, codD2, n2);
-						if(turma2==null){
-							JOptionPane.showMessageDialog(null,"Nao existe Turma com esses Dados");
-						}
-						else{
-							JOptionPane.showMessageDialog(null,"A Turma removida foi: \n"+"Periodo :"+turma2.getPeriodo()+"\nCodigo Disciplina :"+turma2.getDisciplina().getCodigo()+"\nNome Disciplina: "+turma2.getDisciplina().getNome()+"\nNumero: "+turma2.getNumero());
+						try{
+							Turma turma2 = facade.getTurma(p2, codD2, n2);
+							if(turma2!=null){
+								JOptionPane.showMessageDialog(null,"A Turma removida foi: \n"+"Periodo :"+turma2.getPeriodo()+"\nCodigo Disciplina :"+turma2.getDisciplina().getCodigo()+"\nNome Disciplina: "+turma2.getDisciplina().getNome()+"\nNumero: "+turma2.getNumero());
+								
+							}else{
+								JOptionPane.showMessageDialog(null,"Nao existe Turma com esses Dados");
+							}
+						}catch(SCAException ex){
+							Logger.getInstance().log(ex);
+							JOptionPane.showMessageDialog(null, ex.getMessage());
 						}
 						break;	
 						
@@ -215,12 +259,17 @@ public class SCA {
 						String p= JOptionPane.showInputDialog(null,"Digite o Periodo da Turma");	
 						int codD= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo da Disciplian"));
 						int n= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Numero da Turma"));
-						Turma turma = facade.getTurma(p, codD, n);
-						if(turma==null){
-							JOptionPane.showMessageDialog(null,"Nao existe Turma com esses Dados");
-						}
-						else{
-							JOptionPane.showMessageDialog(null,"Periodo :"+turma.getPeriodo()+"\nCodigo Disciplina :"+turma.getDisciplina().getCodigo()+"\nNome Disciplina: "+turma.getDisciplina().getNome()+"\nNumero: "+turma.getNumero());
+						try{
+							Turma turma = facade.getTurma(p, codD, n);
+							if(turma!=null){
+								facade.verDetalhes(n);							
+							}
+							else{
+								JOptionPane.showMessageDialog(null,"Nao existe Turma com esses Dados");							
+							}
+						}catch(SCAException ex){
+							Logger.getInstance().log(ex);
+							JOptionPane.showMessageDialog(null, ex.getMessage());
 						}
 						break;
 					case(0): //Sair Menu Gerenciar Turmas

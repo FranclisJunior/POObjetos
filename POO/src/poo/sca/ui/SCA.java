@@ -52,7 +52,7 @@ public class SCA {
 								op11 = Integer.parseInt(JOptionPane.showInputDialog(null,"Deseja criar outro Curso? \n1-Sim \n0-Nao"));
 							}catch(SCAException ex){
 								Logger.getInstance().log(ex);
-								JOptionPane.showMessageDialog(null, ex.getMessage());
+								JOptionPane.showMessageDialog(null, "Erro interno do sistema. Por favor procure o suporte.");
 								op11=0;
 							}catch(SCARuntimeException ex){
 								Logger.getInstance().log(ex);
@@ -72,7 +72,8 @@ public class SCA {
 							}
 							JOptionPane.showMessageDialog(null,cursos);
 						}catch(SCAException ex)	{
-							JOptionPane.showMessageDialog(null,ex.getMessage());
+							Logger.getInstance().log(ex);
+							JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
 						}
 						break;
 					case(0):  //Sair Menu Gerenciar Cursos
@@ -103,7 +104,7 @@ public class SCA {
 							}catch(SCAException ex){
 								Logger.getInstance().log(ex);
 								op21= 0;
-								JOptionPane.showMessageDialog(null,ex.getMessage());
+								JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
 							} 
 							
 						}while(op21==1);	
@@ -120,7 +121,7 @@ public class SCA {
 							JOptionPane.showMessageDialog(null, professores);
 						}catch(SCAException ex){
 							Logger.getInstance().log(ex);
-							JOptionPane.showMessageDialog(null, ex.getMessage());
+							JOptionPane.showMessageDialog(null, "Erro interno do sistema. Por favor procure o suporte.");
 						}
 						break;
 					case(0):  //Sair Menu Gerenciar Professores
@@ -147,11 +148,23 @@ public class SCA {
 							}catch(SCAException ex){
 								Logger.getInstance().log(ex);
 								op31=0;
-								JOptionPane.showMessageDialog(null,ex.getMessage());
+								JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
 							}catch(SCARuntimeException ex2){
-								Logger.getInstance().log(ex2);
-								op31=0;								
-								JOptionPane.showMessageDialog(null,"Disciplina nao Criada");
+								//tenta mas uma vez criar a Disciplina
+								JOptionPane.showMessageDialog(null,"Codigo invalido, Por Favor Tente Novamente");								
+								try{									
+									Disciplina	disciplina2 = facade.criarDisciplina();
+								}catch(SCARuntimeException ex){
+									op31=0;
+									// nao teve jeito usuario nao sabe ler
+									Logger.getInstance().log(ex);
+									JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
+									
+								} catch (SCAException e) {
+									Logger.getInstance().log(e);
+									JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
+								}
+								
 							}
 							
 						}while(op31==1);	
@@ -168,7 +181,7 @@ public class SCA {
 							JOptionPane.showMessageDialog(null,disciplinas);
 						}catch(SCAException ex)	{
 							Logger.getInstance().log(ex);
-							JOptionPane.showMessageDialog(null, ex.getMessage());
+							JOptionPane.showMessageDialog(null, "Erro interno do sistema. Por favor procure o suporte.");
 						}
 						break;
 						
@@ -203,7 +216,7 @@ public class SCA {
 							}catch(SCAException ex){
 								Logger.getInstance().log(ex);
 								op41=0;
-								JOptionPane.showMessageDialog(null,ex.getMessage());
+								JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
 							}
 						
 						}while(op41==1);
@@ -229,7 +242,7 @@ public class SCA {
 							}
 						}catch(SCAException ex){
 							Logger.getInstance().log(ex);
-							JOptionPane.showMessageDialog(null,ex.getMessage());
+							JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
 						}catch(SCARuntimeException ex){
 							Logger.getInstance().log(ex);
 							JOptionPane.showMessageDialog(null,ex.getMessage());
@@ -250,7 +263,7 @@ public class SCA {
 							}
 						}catch(SCAException ex){
 							Logger.getInstance().log(ex);
-							JOptionPane.showMessageDialog(null, ex.getMessage());
+							JOptionPane.showMessageDialog(null, "Erro interno do sistema. Por favor procure o suporte.");
 						}
 						break;	
 						
@@ -269,7 +282,7 @@ public class SCA {
 							}
 						}catch(SCAException ex){
 							Logger.getInstance().log(ex);
-							JOptionPane.showMessageDialog(null, ex.getMessage());
+							JOptionPane.showMessageDialog(null, "Erro interno do sistema. Por favor procure o suporte.");
 						}
 						break;
 					case(0): //Sair Menu Gerenciar Turmas

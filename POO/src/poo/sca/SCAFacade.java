@@ -132,23 +132,7 @@ public class SCAFacade {
 			persistencia.salvar(disciplina);
 		}catch(SCARuntimeException ex){
 			Logger.getInstance().log(ex);
-			//Pede novamente o codigo ao usuario
-			JOptionPane.showMessageDialog(null,"Codigo invalido, Por Favor Tente Novamente");
-			cod= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo da Disciplina"));
-			try{
-				//tenta seta o codigo e salvar
-				disciplina.setCodigo(cod);
-				persistencia.salvar(disciplina);
-			}catch(SCARuntimeException ex2){
-				// nao teve jeito usuario nao sabe ler
-				Logger.getInstance().log(ex);
-				JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
-				throw new SCARuntimeException("Disciplina nao Criada");
-			
-			}catch(SCAPersistenciaException ex2){
-				Logger.getInstance().log(ex2);
-				throw new SCAException("Erro ao salvar no arquivo");
-			}			
+			throw new SCARuntimeException("Erro de entrada do usuario");			
 		} catch (SCAPersistenciaException e) {
 			Logger.getInstance().log(e);
 			throw new SCAException("Erro ao salvar no arquivo");

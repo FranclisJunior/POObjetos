@@ -1,0 +1,50 @@
+>>> 2012-12-21T13:03:25-0200
+poo.sca.SCARuntimeException: numero menor que 0 ou maior que 99999
+	at poo.sca.Disciplina.setCodigo(Disciplina.java:14)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:130)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:145)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2012-12-21T13:03:33-0200
+poo.sca.SCARuntimeException: numero menor que 0 ou maior que 99999
+	at poo.sca.Disciplina.setCodigo(Disciplina.java:14)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:130)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:156)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2012-12-21T13:03:33-0200
+poo.sca.SCARuntimeException: Erro de entrada do usuario
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:135)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:156)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2012-12-21T13:03:44-0200
+poo.sca.SCARuntimeException: numero menor que 0 ou maior que 99999
+	at poo.sca.Disciplina.setCodigo(Disciplina.java:14)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:130)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:145)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2012-12-21T13:04:34-0200
+poo.sca.SCARuntimeException: numero menor que 0 ou maior que 99999
+	at poo.sca.Disciplina.setCodigo(Disciplina.java:14)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:130)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:145)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2012-12-21T13:04:40-0200
+poo.sca.SCARuntimeException: numero menor que 0 ou maior que 99999
+	at poo.sca.Disciplina.setCodigo(Disciplina.java:14)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:130)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:156)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2012-12-21T13:04:40-0200
+poo.sca.SCARuntimeException: Erro de entrada do usuario
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:135)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:156)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2012-12-21T13:09:15-0200
+poo.sca.SCARuntimeException: Nao existe turma com esse numero
+	at poo.sca.SCAFacade.verDetalhes(SCAFacade.java:370)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:241)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2012-12-21T13:09:21-0200
+poo.sca.SCARuntimeException: Nao existe turma com esse numero
+	at poo.sca.SCAFacade.verDetalhes(SCAFacade.java:370)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:241)
+	at poo.sca.ui.SCA.main(SCA.java:22)

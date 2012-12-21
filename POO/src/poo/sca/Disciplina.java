@@ -11,7 +11,7 @@ public class Disciplina  {
 	}
 	public void setCodigo(int codigo) {
 		if(codigo>99999 || codigo<=0){
-				throw new SCARuntimeException("numero menor que 0 ou maior que 99999");				
+				throw new SCARuntimeException("codigo da disciplina menor que 0 ou maior que 99999");				
 		}else{
 			this.codigo = codigo;
 		}		

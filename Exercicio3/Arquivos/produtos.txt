@@ -1,1 +1,3 @@
-1:2:3:4.0
+Pera:1:Pera chinesa:0.55
+Pao:2:Pao Doce:0.25
+Caja:3:Caja fresco:0.9

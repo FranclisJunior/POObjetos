@@ -1,17 +1,47 @@
 package poo.vendas;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Map;
 
 public class Pedido {
-	private Date data;
+	private String data;
 	private Cliente cliente;
 	private int codigoPedido;	
 	ArrayList<ItemPedido> listaItens = new ArrayList<ItemPedido>();
 	Map<Produto,ItemPedido> mapItens;
 	
-	
+	public ArrayList<ItemPedido> getListaItens() {
+		return listaItens;
+	}
+
+	public void setListaItens(ArrayList<ItemPedido> listaItens) {
+		this.listaItens = listaItens;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public int getCodigoPedido() {
+		return codigoPedido;
+	}
+
+	public void setCodigoPedido(int codigoPedido) {
+		this.codigoPedido = codigoPedido;
+	}
+
 	public void addProduto(Produto p){
 		ItemPedido pedido = new ItemPedido();
 		pedido.setProduto(p);

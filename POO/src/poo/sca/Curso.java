@@ -16,6 +16,9 @@ public class Curso {
 		return nome;
 	}
 	public void setNome(String nome) {
+		if(nome.equals(null)|| nome.equals("")|| nome.equals("null")){
+			throw new SCARuntimeException("Nome da Curso é invalido "+nome);
+		}
 		this.nome = nome;
 	}
 	

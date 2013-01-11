@@ -16,6 +16,9 @@ public class Professor  {
 		return nome;
 	}
 	public void setNome(String nome) {
+		if(nome.equals(null)|| nome.equals("")|| nome.equals("null")){
+			throw new SCARuntimeException("Nome da Professor é invalido: "+nome);
+		}
 		this.nome = nome;
 	}
 	

@@ -107,61 +107,65 @@ public class SCAFacade {
 	
 
 	public Disciplina criarDisciplina()throws SCAException, SCARuntimeException {
-		
-		int cod= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo da Disciplina"));	
-		String nome= JOptionPane.showInputDialog(null,"Digite o Nome da Disciplina");
 		Disciplina disciplina = new Disciplina();
-		
-		// Testa se ja tem disciplina com o mesmo codigo na lista antes salvar no arquivo.	
-		ArrayList<Disciplina> disc;
-		try {
+		try{
+			int cod= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo da Disciplina"));	
+			String nome= JOptionPane.showInputDialog(null,"Digite o Nome da Disciplina");
+			
+			// Testa se ja tem disciplina com o mesmo codigo na lista antes salvar no arquivo.	
+			ArrayList<Disciplina> disc;
 			disc = persistencia.recuperarDisciplinas();
 			for(Disciplina d : disc){
 				if(cod==d.getCodigo()){
-					throw new SCAException("Ja existe disciplina com esse codigo");
+					throw new SCARuntimeException("Ja existe disciplina com esse codigo");
 				}
 			}
-		} catch (SCAPersistenciaException e) {	
-			Logger.getInstance().log(e);
-			throw new SCAException("Erro ao ler o arquivo");
-		}								
-				
-		try{
+			
 			disciplina.setCodigo(cod);
 			disciplina.setNome(nome);
 			persistencia.salvar(disciplina);
+		
+		}catch(NumberFormatException ex){
+			throw new SCARuntimeException("Codigo Invalido");		
+		} catch (SCAPersistenciaException e) {	
+			Logger.getInstance().log(e);
+			throw new SCAException("Erro ao ler o arquivo");		
 		}catch(SCARuntimeException ex){
 			Logger.getInstance().log(ex);
-			throw new SCARuntimeException("Erro de entrada do usuario");			
-		} catch (SCAPersistenciaException e) {
-			Logger.getInstance().log(e);
-			throw new SCAException("Erro ao salvar no arquivo");
+			throw new SCARuntimeException(ex.getMessage());			
 		}
 		return disciplina;
+		
 	}
 		
 	
 	
 	public Professor criarProfessor()throws SCARuntimeException,SCAException{
-		int matricula= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Matricula do Professor(a)"));
-		String n= JOptionPane.showInputDialog(null,"Digite o Nome do Professor(a)");
 		Professor professor = new Professor();
-		professor.setMatricula(matricula);
-		professor.setNome(n);
-		
-		// testa se ja existe professor com a mesma matricula na lista antes de salvar no arquivo	
-		try{ 		
+		try{
+			int matricula= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Matricula do Professor(a)"));
+			String n= JOptionPane.showInputDialog(null,"Digite o Nome do Professor(a)");	
+			
+			// testa se ja existe professor com a mesma matricula na lista antes de salvar no arquivo			 		
 			ArrayList<Professor> prof = persistencia.recuperarProfessores();		
 			for(Professor p:prof){
 				if(matricula==p.getMatricula()){
 					throw new SCARuntimeException("Ja existe professor com essa matricula");
 				}
-			}			
+			}
+			
+			professor.setMatricula(matricula);
+			professor.setNome(n);
 			persistencia.salvar(professor);
-		
-		}catch(SCAPersistenciaException ex){
+		}catch(NumberFormatException ex){
 			Logger.getInstance().log(ex);
-			throw new SCAException("Erro ao Salvar");			
+			throw new SCARuntimeException("Matricula Invalida");
+		}catch(SCAPersistenciaException ex2){
+			Logger.getInstance().log(ex2);
+			throw new SCAException("Erro no arquivo");			
+		}catch(SCARuntimeException ex3){
+			Logger.getInstance().log(ex3);
+			throw new SCARuntimeException(ex3.getMessage());
 		}
 		
 		return professor;
@@ -172,6 +176,8 @@ public class SCAFacade {
 		try{
 			int cod= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo do Curso"));
 			String nome= JOptionPane.showInputDialog(null,"Digite o Nome do Curso");
+			
+			//testa se ja existe curso com o mesmo codigo
 			ArrayList<Curso> curs = persistencia.recuperarCursos();
 			for(Curso crs: curs){
 				if(cod==crs.getCodigo()){
@@ -184,7 +190,13 @@ public class SCAFacade {
 			persistencia.salvar(curso);
 		}catch(SCAPersistenciaException ex){
 			Logger.getInstance().log(ex);
-			throw new SCAException("Erro ao Salvar");
+			throw new SCAException("Erro no arquivo");
+		}catch(NumberFormatException ex2){
+			Logger.getInstance().log(ex2);
+			throw new SCARuntimeException("Codigo Invalido");
+		}catch(SCARuntimeException ex3){
+			Logger.getInstance().log(ex3);
+			throw new SCARuntimeException(ex3.getMessage());
 		}
 		return curso;	
 	}

@@ -20,10 +20,7 @@ public class SCA {
 
 	public static void main(String [] args){		
 		SCA.exibirMenu();		
-	}
-	
-	
-	
+	}	
 	
 	public static void exibirMenu(){		
 		
@@ -151,7 +148,7 @@ public class SCA {
 								JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
 							}catch(SCARuntimeException ex2){
 								//tenta mas uma vez criar a Disciplina
-								JOptionPane.showMessageDialog(null,"Codigo invalido, Por Favor Tente Novamente");								
+								JOptionPane.showMessageDialog(null,ex2.getMessage());								
 								try{									
 									Disciplina	disciplina2 = facade.criarDisciplina();
 								}catch(SCARuntimeException ex){
@@ -163,10 +160,8 @@ public class SCA {
 								} catch (SCAException e) {
 									Logger.getInstance().log(e);
 									JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
-								}
-								
-							}
-							
+								}								
+							}							
 						}while(op31==1);	
 						break;
 					case(2): //Ver Disciplinas

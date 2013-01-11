@@ -48,3 +48,438 @@ poo.sca.SCARuntimeException: Nao existe turma com esse numero
 	at poo.sca.SCAFacade.verDetalhes(SCAFacade.java:370)
 	at poo.sca.ui.SCA.exibirMenu(SCA.java:241)
 	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:43:50-0200
+poo.sca.SCAException: Ja existe disciplina com esse codigo
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:121)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:145)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:44:06-0200
+poo.sca.SCAException: Ja existe disciplina com esse codigo
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:121)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:145)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:44:41-0200
+poo.sca.SCARuntimeException: codigo da disciplina menor que 0 ou maior que 99999
+	at poo.sca.Disciplina.setCodigo(Disciplina.java:14)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:130)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:156)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:44:41-0200
+poo.sca.SCARuntimeException: Erro de entrada do usuario
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:135)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:156)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:46:23-0200
+poo.sca.SCARuntimeException: Nome da Disciplina é invalido: 
+	at poo.sca.Disciplina.setNome(Disciplina.java:27)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:131)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:46:23-0200
+poo.sca.SCARuntimeException: Erro de entrada do usuario
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:135)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:50:31-0200
+poo.sca.SCARuntimeException: Nome da Disciplina é invalido: 
+	at poo.sca.Disciplina.setNome(Disciplina.java:27)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:131)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:142)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:50:36-0200
+poo.sca.SCARuntimeException: codigo da disciplina menor que 0 ou maior que 99999
+	at poo.sca.Disciplina.setCodigo(Disciplina.java:14)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:130)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:50:36-0200
+poo.sca.SCARuntimeException: Erro de entrada do usuario
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:135)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:51:10-0200
+poo.sca.SCARuntimeException: Nome da Disciplina é invalido: 
+	at poo.sca.Disciplina.setNome(Disciplina.java:27)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:131)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:142)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:52:19-0200
+poo.sca.SCARuntimeException: Nome da Disciplina é invalido: null
+	at poo.sca.Disciplina.setNome(Disciplina.java:27)
+	at poo.sca.io.SCAPersistenciaArquivo.recuperarDisciplinas(SCAPersistenciaArquivo.java:134)
+	at poo.sca.SCAFacade.getDisciplinasIterator(SCAFacade.java:236)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:171)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:52:19-0200
+poo.sca.io.SCAPersistenciaException
+	at poo.sca.io.SCAPersistenciaArquivo.recuperarDisciplinas(SCAPersistenciaArquivo.java:140)
+	at poo.sca.SCAFacade.getDisciplinasIterator(SCAFacade.java:236)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:171)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:52:19-0200
+poo.sca.SCAException: Erro ao ler o arquivo de disciplinas
+	at poo.sca.SCAFacade.getDisciplinasIterator(SCAFacade.java:239)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:171)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:52:23-0200
+poo.sca.SCARuntimeException: Nome da Disciplina é invalido: null
+	at poo.sca.Disciplina.setNome(Disciplina.java:27)
+	at poo.sca.io.SCAPersistenciaArquivo.recuperarDisciplinas(SCAPersistenciaArquivo.java:134)
+	at poo.sca.SCAFacade.getDisciplinasIterator(SCAFacade.java:236)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:171)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:52:23-0200
+poo.sca.io.SCAPersistenciaException
+	at poo.sca.io.SCAPersistenciaArquivo.recuperarDisciplinas(SCAPersistenciaArquivo.java:140)
+	at poo.sca.SCAFacade.getDisciplinasIterator(SCAFacade.java:236)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:171)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:52:23-0200
+poo.sca.SCAException: Erro ao ler o arquivo de disciplinas
+	at poo.sca.SCAFacade.getDisciplinasIterator(SCAFacade.java:239)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:171)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:53:13-0200
+poo.sca.SCARuntimeException: Nome da Disciplina é invalido: null
+	at poo.sca.Disciplina.setNome(Disciplina.java:27)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:131)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:142)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:53:18-0200
+poo.sca.SCARuntimeException: codigo da disciplina menor que 0 ou maior que 99999
+	at poo.sca.Disciplina.setCodigo(Disciplina.java:14)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:130)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:53:18-0200
+poo.sca.SCARuntimeException: codigo da disciplina menor que 0 ou maior que 99999
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:135)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:54:03-0200
+poo.sca.SCARuntimeException: codigo da disciplina menor que 0 ou maior que 99999
+	at poo.sca.Disciplina.setCodigo(Disciplina.java:14)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:130)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:54:03-0200
+poo.sca.SCARuntimeException: codigo da disciplina menor que 0 ou maior que 99999
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:135)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:54:14-0200
+poo.sca.SCARuntimeException: codigo da disciplina menor que 0 ou maior que 99999
+	at poo.sca.Disciplina.setCodigo(Disciplina.java:14)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:130)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:142)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:54:23-0200
+poo.sca.SCARuntimeException: codigo da disciplina menor que 0 ou maior que 99999
+	at poo.sca.Disciplina.setCodigo(Disciplina.java:14)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:130)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T00:54:23-0200
+poo.sca.SCARuntimeException: codigo da disciplina menor que 0 ou maior que 99999
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:135)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:01:37-0200
+poo.sca.SCARuntimeException: Codigo Invalido
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:128)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:02:59-0200
+poo.sca.SCARuntimeException: Ja existe disciplina com esse codigo
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:119)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:142)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:03:03-0200
+poo.sca.SCARuntimeException: Codigo Invalido: 
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:128)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:03:10-0200
+poo.sca.SCARuntimeException: codigo da disciplina menor que 0 ou maior que 99999
+	at poo.sca.Disciplina.setCodigo(Disciplina.java:14)
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:123)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:03:10-0200
+poo.sca.SCARuntimeException: codigo da disciplina menor que 0 ou maior que 99999
+	at poo.sca.SCAFacade.criarDisciplina(SCAFacade.java:134)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:153)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:20:45-0200
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:177)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:20:45-0200
+poo.sca.SCARuntimeException: Codigo Invalido
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:196)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:20:51-0200
+java.lang.NumberFormatException: For input string: "k"
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:177)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:20:51-0200
+poo.sca.SCARuntimeException: Codigo Invalido
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:196)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:21:07-0200
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:177)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:21:07-0200
+poo.sca.SCARuntimeException: Codigo Invalido
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:196)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:21:09-0200
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:177)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:21:09-0200
+poo.sca.SCARuntimeException: Codigo Invalido
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:196)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:21:43-0200
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:146)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:21:43-0200
+poo.sca.SCARuntimeException: Matricula Invalida
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:162)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:21:46-0200
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:146)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:21:46-0200
+poo.sca.SCARuntimeException: Matricula Invalida
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:162)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:21:56-0200
+poo.sca.SCARuntimeException: Ja existe professor com essa matricula
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:153)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:21:56-0200
+poo.sca.SCARuntimeException: Ja existe professor com essa matricula
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:168)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:03-0200
+poo.sca.SCARuntimeException: Ja existe professor com essa matricula
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:153)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:03-0200
+poo.sca.SCARuntimeException: Ja existe professor com essa matricula
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:168)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:11-0200
+java.lang.NumberFormatException: For input string: "jjl"
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:146)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:11-0200
+poo.sca.SCARuntimeException: Matricula Invalida
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:162)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:14-0200
+java.lang.NumberFormatException: For input string: "kp"
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:146)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:14-0200
+poo.sca.SCARuntimeException: Matricula Invalida
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:162)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:36-0200
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:177)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:36-0200
+poo.sca.SCARuntimeException: Codigo Invalido
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:196)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:40-0200
+poo.sca.io.SCAPersistenciaException
+	at poo.sca.io.SCAPersistenciaArquivo.recuperarCursos(SCAPersistenciaArquivo.java:258)
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:181)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:40-0200
+poo.sca.io.SCAPersistenciaException
+	at poo.sca.io.SCAPersistenciaArquivo.recuperarCursos(SCAPersistenciaArquivo.java:267)
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:181)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:40-0200
+poo.sca.SCAException: Erro no arquivo
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:193)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:43-0200
+poo.sca.io.SCAPersistenciaException
+	at poo.sca.io.SCAPersistenciaArquivo.recuperarCursos(SCAPersistenciaArquivo.java:258)
+	at poo.sca.SCAFacade.getCursosIterator(SCAFacade.java:239)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:65)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:43-0200
+poo.sca.io.SCAPersistenciaException
+	at poo.sca.io.SCAPersistenciaArquivo.recuperarCursos(SCAPersistenciaArquivo.java:267)
+	at poo.sca.SCAFacade.getCursosIterator(SCAFacade.java:239)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:65)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:22:43-0200
+poo.sca.SCAException: Erro ao ler o arquivo cursos
+	at poo.sca.SCAFacade.getCursosIterator(SCAFacade.java:242)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:65)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:23:04-0200
+poo.sca.io.SCAPersistenciaException
+	at poo.sca.io.SCAPersistenciaArquivo.recuperarCursos(SCAPersistenciaArquivo.java:258)
+	at poo.sca.SCAFacade.getCursosIterator(SCAFacade.java:239)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:65)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:23:04-0200
+poo.sca.io.SCAPersistenciaException
+	at poo.sca.io.SCAPersistenciaArquivo.recuperarCursos(SCAPersistenciaArquivo.java:267)
+	at poo.sca.SCAFacade.getCursosIterator(SCAFacade.java:239)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:65)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:23:04-0200
+poo.sca.SCAException: Erro ao ler o arquivo cursos
+	at poo.sca.SCAFacade.getCursosIterator(SCAFacade.java:242)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:65)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:23:26-0200
+poo.sca.SCARuntimeException: Nome da Professor é invalido: 
+	at poo.sca.Curso.setNome(Curso.java:20)
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:189)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:23:26-0200
+poo.sca.SCARuntimeException: Nome da Professor é invalido: 
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:199)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:23:37-0200
+poo.sca.SCARuntimeException: Nome da Professor é invalido: 
+	at poo.sca.Curso.setNome(Curso.java:20)
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:189)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:23:37-0200
+poo.sca.SCARuntimeException: Nome da Professor é invalido: 
+	at poo.sca.SCAFacade.criarCurso(SCAFacade.java:199)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:47)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:42:49-0200
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:146)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:42:49-0200
+poo.sca.SCARuntimeException: Matricula Invalida
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:162)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:43:12-0200
+poo.sca.SCARuntimeException: Nome da Professor é invalido: 
+	at poo.sca.Professor.setNome(Professor.java:20)
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:158)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:43:12-0200
+poo.sca.SCARuntimeException: Nome da Professor é invalido: 
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:168)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:43:22-0200
+poo.sca.SCARuntimeException: Nome da Professor é invalido: 
+	at poo.sca.Professor.setNome(Professor.java:20)
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:158)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:43:22-0200
+poo.sca.SCARuntimeException: Nome da Professor é invalido: 
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:168)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:43:44-0200
+poo.sca.SCARuntimeException: Nome da Professor é invalido: 
+	at poo.sca.Professor.setNome(Professor.java:20)
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:158)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:43:44-0200
+poo.sca.SCARuntimeException: Nome da Professor é invalido: 
+	at poo.sca.SCAFacade.criarProfessor(SCAFacade.java:168)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:94)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:43:49-0200
+poo.sca.io.SCAPersistenciaException
+	at poo.sca.io.SCAPersistenciaArquivo.recuperarDisciplinas(SCAPersistenciaArquivo.java:131)
+	at poo.sca.SCAFacade.getDisciplinasIterator(SCAFacade.java:248)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:171)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:43:49-0200
+poo.sca.io.SCAPersistenciaException
+	at poo.sca.io.SCAPersistenciaArquivo.recuperarDisciplinas(SCAPersistenciaArquivo.java:140)
+	at poo.sca.SCAFacade.getDisciplinasIterator(SCAFacade.java:248)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:171)
+	at poo.sca.ui.SCA.main(SCA.java:22)
+>>> 2013-01-11T01:43:49-0200
+poo.sca.SCAException: Erro ao ler o arquivo de disciplinas
+	at poo.sca.SCAFacade.getDisciplinasIterator(SCAFacade.java:251)
+	at poo.sca.ui.SCA.exibirMenu(SCA.java:171)
+	at poo.sca.ui.SCA.main(SCA.java:22)

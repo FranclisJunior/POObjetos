@@ -1,5 +1,2 @@
 1:SI
 2:LCC
-3:Ecologia
-16:Historia
-0:0

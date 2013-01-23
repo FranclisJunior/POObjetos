@@ -4,6 +4,14 @@ public class ItemPedido {
 	private Produto produto;
 	private int quantidade;
 	
+	public ItemPedido(Produto p, int quant){
+		this.produto = p;
+		this.quantidade=quant;
+	}
+	public ItemPedido(){
+		
+	}
+	
 	public Produto getProduto() {
 		return produto;
 	}

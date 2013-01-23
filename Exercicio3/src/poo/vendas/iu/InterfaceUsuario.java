@@ -10,7 +10,6 @@ import poo.vendas.Produto;
 import poo.vendas.SCVException;
 import poo.vendas.SCVRuntimeException;
 
-
 public class InterfaceUsuario {
 	
 	public static void main(String [] args){
@@ -117,8 +116,8 @@ public class InterfaceUsuario {
 			case(3):
 				int cnd3 = 1;
 				while(cnd3!=0){
-					int op21= Integer.parseInt(JOptionPane.showInputDialog(null,"Escolha uma Opcao: \n\n 1-Novo Pedido \n 2-Ver Pedidos por Data \n 3-Ver Pedidos por Cliente" +
-							" \n\n 0-Voltar "));
+					int op21= Integer.parseInt(JOptionPane.showInputDialog(null,"Escolha uma Opcao: \n\n 1-Novo Pedido \n 2-Ver Todos os Pedidos \n 3-Ver Pedidos por Data \n 4-Ver Pedidos por Cliente" +
+							"\n\n 0-Voltar "));
 					switch(op21){
 					case(1):
 						String cpfs = JOptionPane.showInputDialog(null,"Digite o CPF do Cliente:");
@@ -134,9 +133,20 @@ public class InterfaceUsuario {
 							JOptionPane.showMessageDialog(null,"Ocorreu um problema, procure o suporte");						
 						} catch (SCVRuntimeException e) {
 							JOptionPane.showMessageDialog(null,e.getMessage());
+						}catch(NumberFormatException ex){
+							JOptionPane.showMessageDialog(null,ex.getMessage());
 						}
 					break;
-					case(2):
+					case(2):						
+						try {
+							ArrayList<Pedido> lPedidos = controle.listarPedidos();
+							StringBuilder detalhes = controle.mostrarDetalhesPedido(lPedidos);							
+							JOptionPane.showMessageDialog(null, detalhes);						
+						} catch (SCVException e) {							
+							JOptionPane.showMessageDialog(null,"Ocorreu um problema, procure o suporte");
+						}					
+					break;
+					case(3):
 						String data = JOptionPane.showInputDialog(null,"Digite a data do Pedido");
 						try {
 							ArrayList<Pedido> pedidosData = controle.listarPedidos(data);
@@ -150,33 +160,26 @@ public class InterfaceUsuario {
 							JOptionPane.showMessageDialog(null,"Ocorreu um problema, procure o suporte");
 						}
 					break;
-					case(3):
+					case(4):
 						String cpf = JOptionPane.showInputDialog(null,"Digite o CPF do Cliente: ");
 						try{
 							Cliente cliente = controle.getCliente(cpf);
-							ArrayList<Pedido> pedidosCliente = controle.listarPedidos(cliente);
-							if(pedidosCliente!=null){
-								StringBuilder detalhesPedidoCliente = controle.mostrarDetalhesPedido(pedidosCliente);
-								JOptionPane.showMessageDialog(null,"Pedidos do Cliente:"+cliente.getNome()+"\n\n"+detalhesPedidoCliente);
+							if(cliente!=null){
+								ArrayList<Pedido> pedidosCliente = controle.listarPedidos(cliente);
+								if(pedidosCliente!=null){
+									StringBuilder detalhesPedidoCliente = controle.mostrarDetalhesPedido(pedidosCliente);
+									JOptionPane.showMessageDialog(null,"Pedidos do Cliente: "+cliente.getNome()+"\n\n"+detalhesPedidoCliente);
+								}else{
+									JOptionPane.showMessageDialog(null,"Nao existe pedido deste cliente");
+								}
 							}else{
-								JOptionPane.showMessageDialog(null,"Nao existe pedido deste cliente");
+								JOptionPane.showMessageDialog(null,"Nao existe cliente com esse CPF");
 							}
-						}catch(SCVException ex){
 							
-						}
-					break;	
-					case(4):						
-						try {
-							ArrayList<Pedido> lPedidos = controle.getPedidos();
-							StringBuilder detalhes = new StringBuilder();
-							for(Pedido p: lPedidos){								
-								detalhes.append("Nome do Cliente: "+p.getCliente().getNome()+"\nCodigo Pedido: "+p.getCodigoPedido()+"\nData: "+p.getData()+"\nValor do Pedido: "+p.totalPedido()+"\n\n");								
-							}
-							JOptionPane.showMessageDialog(null, detalhes);						
-						} catch (SCVException e) {							
+						}catch(SCVException ex){
 							JOptionPane.showMessageDialog(null,"Ocorreu um problema, procure o suporte");
-						}						
-					break;
+						}
+					break;					
 					case(0):
 						cnd3=0;
 						break;

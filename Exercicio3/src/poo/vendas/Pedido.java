@@ -1,6 +1,7 @@
 package poo.vendas;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Pedido {
@@ -8,7 +9,7 @@ public class Pedido {
 	private Cliente cliente;
 	private int codigoPedido;	
 	ArrayList<ItemPedido> listaItens = new ArrayList<ItemPedido>();
-	Map<Produto,ItemPedido> mapItens;
+	Map<Produto,ItemPedido> mapItens = new HashMap<Produto,ItemPedido>();
 	
 	public ArrayList<ItemPedido> getListaItens() {
 		return listaItens;
@@ -42,18 +43,28 @@ public class Pedido {
 		this.codigoPedido = codigoPedido;
 	}
 
-	public void addProduto(Produto p){
-		ItemPedido pedido = new ItemPedido();
-		pedido.setProduto(p);
-		pedido.setQuantidade(1);
-		listaItens.add(pedido);
+	public void addProduto(Produto p){	
+		if(mapItens.containsKey(p)){
+			int novaQtd = mapItens.get(p).getQuantidade()+1;
+			ItemPedido pedido = new ItemPedido(p,novaQtd);			
+			mapItens.put(p, pedido);
+		}else{
+			ItemPedido pedido = new ItemPedido(p,1);		
+			listaItens.add(pedido);
+			mapItens.put(p, pedido);
+		}
 	}
 	
 	public void addProduto(Produto p, int qtd){
-		ItemPedido pedido = new ItemPedido();
-		pedido.setProduto(p);
-		pedido.setQuantidade(qtd);
-		listaItens.add(pedido);
+		if(mapItens.containsKey(p)){
+			int novaQtd = (mapItens.get(p).getQuantidade())+qtd;
+			ItemPedido pedido = new ItemPedido(p,novaQtd);			
+			mapItens.put(p, pedido);
+		}else{
+			ItemPedido pedido = new ItemPedido(p,qtd);		
+			listaItens.add(pedido);
+			mapItens.put(p, pedido);
+		}
 	}
 	
 	public double totalPedido(){

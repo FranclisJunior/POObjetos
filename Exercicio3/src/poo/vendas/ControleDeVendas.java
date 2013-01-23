@@ -17,8 +17,16 @@ public class ControleDeVendas {
 	
 	public String getDateAtual() {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	    Date date = new Date();
-	    return dateFormat.format(date);
+	    Date data = new Date();
+	    return dateFormat.format(data);
+	}
+	
+	public ArrayList<Pedido> listarPedidos() throws SCVException{		
+		try{		
+			return persistencia.recuperarPedidos();	
+		}catch(SCVPersistenciaException ex){
+			throw new SCVException("Erro ao ler");
+		}
 	}
 
 	public ArrayList<Pedido> listarPedidos(Cliente c) throws  SCVException{
@@ -29,7 +37,7 @@ public class ControleDeVendas {
 				if(c.getCpf().equals(pedido.getCliente().getCpf())){
 					pedidosCliente.add(pedido);
 				}
-			}
+			}	
 			return pedidosCliente;
 		}catch(SCVPersistenciaException ex){
 			throw new SCVException("Erro no arquivo");
@@ -79,8 +87,11 @@ public class ControleDeVendas {
 			return pedido;
 		}catch(SCVPersistenciaException ex){
 			throw new SCVException("Erro ao Salvar");
+		}catch(NumberFormatException ex){
+			throw new NumberFormatException("Codigo ou quantidade do produto é invalida");
 		}
 	}	
+	
 	
 	public void addProduto(Produto p)throws SCVException, SCVRuntimeException{		
 		try{		
@@ -105,13 +116,14 @@ public class ControleDeVendas {
 		}
 	}
 	
-	public Cliente getCliente(String cpf)throws SCVException{		
+	public Cliente getCliente(String cpf)throws SCVException{
+		
 		try {
 			Iterator<Cliente> it = persistencia.recuperarClientes().iterator();
 			while(it.hasNext()){
 				Cliente c = it.next();
 				if(c.getCpf().equals(cpf)){
-					return c;
+					 return c;
 				}				
 			}			
 		}catch (SCVPersistenciaException e) {
@@ -148,16 +160,9 @@ public class ControleDeVendas {
 	public StringBuilder mostrarDetalhesPedido(ArrayList<Pedido> pedidos){
 		StringBuilder detalhes = new StringBuilder();			
 		for(Pedido p : pedidos ){
-			detalhes.append("Nome do Cliente: "+p.getCliente().getNome()+"\nCodigo do Pedido: "+p.getCodigoPedido()+"\nData do Pedido"+p.getData()+"\nValor do Pedido: "+p.totalPedido()+"\n\n");
+			detalhes.append("Nome do Cliente: "+p.getCliente().getNome()+"\nCodigo do Pedido: "+p.getCodigoPedido()+"\nData do Pedido: "+p.getData()+"\nValor do Pedido: "+p.totalPedido()+"\n\n");
 		}
 		return detalhes;
-	}
+	}	
 	
-	public ArrayList<Pedido> getPedidos() throws SCVException{		
-		try{		
-			return persistencia.recuperarPedidos();	
-		}catch(SCVPersistenciaException ex){
-			throw new SCVException("Erro ao ler");
-		}
-	}
 }

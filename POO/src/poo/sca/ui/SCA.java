@@ -41,10 +41,12 @@ public class SCA {
 					
 					switch(op1){
 					case (1): // Adcionar Curso
-						int op11= 2;
+						int op11= 1;
 						do{
 							try{
-								Curso curso = facade.criarCurso();				
+								int cod= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo do Curso"));
+								String nome= JOptionPane.showInputDialog(null,"Digite o Nome do Curso");
+								Curso curso = facade.criarCurso(cod,nome);				
 								JOptionPane.showMessageDialog(null,"Curso Criado");
 								op11 = Integer.parseInt(JOptionPane.showInputDialog(null,"Deseja criar outro Curso? \n1-Sim \n0-Nao"));
 							}catch(SCAException ex){
@@ -55,8 +57,13 @@ public class SCA {
 								Logger.getInstance().log(ex);
 								JOptionPane.showMessageDialog(null, ex.getMessage());								
 								--op11;
+							}catch(NumberFormatException ex2){
+								--op11;
+								Logger.getInstance().log(ex2);
+								throw new SCARuntimeException("Codigo Invalido");
 							}
-						}while(op11==1);	
+							
+						}while(op11!=0);	
 						break;
 						
 					case(2): //Ver Cursos				
@@ -91,7 +98,9 @@ public class SCA {
 						int op21=2;
 						do{
 							try{	
-								Professor professor = facade.criarProfessor();												
+								int matricula= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Matricula do Professor(a)"));
+								String n= JOptionPane.showInputDialog(null,"Digite o Nome do Professor(a)");
+								Professor professor = facade.criarProfessor(matricula, n);												
 								JOptionPane.showMessageDialog(null,"Professor Criado");
 								op21 = Integer.parseInt(JOptionPane.showInputDialog(null,"Deseja Criar Outro Professor? \n1-Sim \n0-Nao"));
 							}catch(SCARuntimeException ex){
@@ -102,9 +111,12 @@ public class SCA {
 								Logger.getInstance().log(ex);
 								op21= 0;
 								JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
-							} 
-							
-						}while(op21==1);	
+							}catch(NumberFormatException ex){
+								--op21;
+								Logger.getInstance().log(ex);
+								JOptionPane.showMessageDialog(null,"Matricula Invalida"); 
+							}
+						}while(op21!=0);	
 						break;
 						
 					case(2): //Ver Professores
@@ -138,31 +150,42 @@ public class SCA {
 					case(1): //Adcionar Disciplinas
 						int op31=1;
 						do{
-							try{	
-								Disciplina disciplina = facade.criarDisciplina();												
+							try{
+								int cod= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo da Disciplina"));	
+								String nome= JOptionPane.showInputDialog(null,"Digite o Nome da Disciplina");
+								Disciplina disciplina = facade.criarDisciplina(cod,nome);												
 								JOptionPane.showMessageDialog(null,"Disciplina Criada");
 								op31 = Integer.parseInt(JOptionPane.showInputDialog(null,"Deseja criar Outra Disciplina? \n1-Sim \n0-Nao"));
 							}catch(SCAException ex){
 								Logger.getInstance().log(ex);
 								op31=0;
 								JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
-							}catch(SCARuntimeException ex2){
+							}catch(NumberFormatException ex){
+								--op31;
+								Logger.getInstance().log(ex);
+								JOptionPane.showMessageDialog(null,"Codigo Invalido");		
+							}catch(SCARuntimeException ex){
 								//tenta mas uma vez criar a Disciplina
-								JOptionPane.showMessageDialog(null,ex2.getMessage());								
-								try{									
-									Disciplina	disciplina2 = facade.criarDisciplina();
-								}catch(SCARuntimeException ex){
-									op31=0;
+								JOptionPane.showMessageDialog(null,ex.getMessage());								
+								try{
+									int cod= Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o Codigo da Disciplina"));	
+									String nome= JOptionPane.showInputDialog(null,"Digite o Nome da Disciplina");
+									Disciplina	disciplina2 = facade.criarDisciplina(cod, nome);
+								}catch(SCARuntimeException ex2){
+									op31=0;// para o while
 									// nao teve jeito usuario nao sabe ler
-									Logger.getInstance().log(ex);
-									JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
-									
+									Logger.getInstance().log(ex2);
+									JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");									
 								} catch (SCAException e) {
 									Logger.getInstance().log(e);
 									JOptionPane.showMessageDialog(null,"Erro interno do sistema. Por favor procure o suporte.");
+								}catch(NumberFormatException e){
+									op31=0;
+									Logger.getInstance().log(e);
+									JOptionPane.showMessageDialog(null,"Codigo Invalido");		
 								}								
 							}							
-						}while(op31==1);	
+						}while(op31!=0);	
 						break;
 					case(2): //Ver Disciplinas
 						

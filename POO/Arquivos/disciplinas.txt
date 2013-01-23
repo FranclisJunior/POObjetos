@@ -1,2 +1,4 @@
-12:POO
 490:Estrutura
+15:Etica
+1:POO
+2:poo

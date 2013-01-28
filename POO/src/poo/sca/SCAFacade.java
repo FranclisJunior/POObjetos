@@ -87,7 +87,7 @@ public class SCAFacade {
 			ArrayList<Turma> turm = persistencia.recuperarTurmas();
 			for(Turma t : turm){
 				if(periodo.equals(t.getPeriodo()) && num==t.getNumero()){
-					throw new SCAException("Ja existe Turma com esses dados");
+					throw new SCARuntimeException("Ja existe Turma com esses dados");
 				}
 			}
 			
@@ -170,7 +170,7 @@ public class SCAFacade {
 			ArrayList<Curso> curs = persistencia.recuperarCursos();
 			for(Curso crs: curs){
 				if(cod==crs.getCodigo()){
-					throw new SCAException("Ja existe Curso com esse codigo");
+					throw new SCARuntimeException("Ja existe Curso com esse codigo");
 				}
 			}
 			
